@@ -1,4 +1,4 @@
- # Loading
+ # UI Experiments
  Experimenting with visual presentation and graphics on the web.
 
 ## Ideas for future experiments
