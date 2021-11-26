@@ -19,7 +19,6 @@ const spinnerApp = {
 const app = Vue.createApp(spinnerApp);
 
 app.config.compilerOptions.isCustomElement = (tag) => {
-    console.log("IsCustomElement,", tag, tag === "spinner-deluxe" ? true : false);
     return tag === "spinner-deluxe" ? true : false
 };
 
