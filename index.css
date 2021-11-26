@@ -24,44 +24,30 @@ body {
   background-color: #b2bbd3;
 }
 
+.spinner li, .spinner li:after{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
+  width: 20vw;
+  height: 20vw;
+
+  margin-left: -10vw;
+  margin-top: -10vw;
+
+  border-radius: 50%;
+  border: 2.5vw solid;
+  
+  box-sizing: border-box;
+}
+
 .spinner li:after{
     content: "";
-
-    position: fixed;
-    left: 50%;
-    top: 50%;
-
-    width: 20vw;
-    height: 20vw;
-
-    margin-left: -10vw;
-    margin-top: -10vw;
-
     animation: spin 3s infinite linear;
-
-    box-sizing: border-box;
-    border-radius: 50%;
-    background-color:transparent;
-    border: 2.5vw solid;
-    
     border-color: #b2bbd3 transparent transparent transparent;
 }
 
 .spinner li {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-
-    width: 20vw;
-    height: 20vw;
-
-    margin-left: -10vw;
-    margin-top: -10vw;
-
-    box-sizing: border-box;
-    border-radius: 50%;
-    background-color:transparent;
-    border: 2.5vw solid;
     border-color: #232830;
 }
 
