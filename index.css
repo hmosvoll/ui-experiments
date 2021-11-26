@@ -3,64 +3,65 @@ body {
     background: #292e3a;
 }
 
-.wheel {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    width: 100px;
-    height: 100px;
-
-    margin-left: -50px;
-    margin-top: -50px;
-
-    border-radius: 50%;
-    background-color: #b2bbd3;
+.spinner {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.circle:after{
+.spinner:after {
+  content: "";
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
+  width: 10vw;
+  height: 10vw;
+
+  margin-left: -5vw;
+  margin-top: -5vw;
+  border-radius: 50%;
+  background-color: #b2bbd3;
+}
+
+.spinner li:after{
     content: "";
-    position: absolute;
+
+    position: fixed;
     left: 50%;
     top: 50%;
 
-    width: 100px;
-    height: 100px;
+    width: 20vw;
+    height: 20vw;
 
-    margin-left: -100px;
-    margin-top: -100px;
-
-    width: 200px;
-    height: 200px;
+    margin-left: -10vw;
+    margin-top: -10vw;
 
     animation: spin 3s infinite linear;
 
     box-sizing: border-box;
     border-radius: 50%;
     background-color:transparent;
-    border: 30px solid;
-    /* border-top-color: chocolate; */
+    border: 2.5vw solid;
+    
     border-color: #b2bbd3 transparent transparent transparent;
 }
 
-.circle {
-    position: absolute;
+.spinner li {
+    position: fixed;
     left: 50%;
     top: 50%;
 
-    width: 100px;
-    height: 100px;
+    width: 20vw;
+    height: 20vw;
 
-    margin-left: -100px;
-    margin-top: -100px;
-
-    width: 200px;
-    height: 200px;
+    margin-left: -10vw;
+    margin-top: -10vw;
 
     box-sizing: border-box;
     border-radius: 50%;
     background-color:transparent;
-    border: 30px solid;
+    border: 2.5vw solid;
     border-color: #232830;
 }
 
