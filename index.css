@@ -45,6 +45,8 @@ body {
   border-color: #232830;
 }
 
+/* I guess preprocessor would be nice here, or is it a new modern way to solve this with plain css? :thinking_face: */
+
 .spinner li:nth-child(1), .spinner li:nth-child(1):after{
   width: 20vw;
   height: 20vw;
@@ -59,6 +61,38 @@ body {
 
   margin-left: -15vw;
   margin-top: -15vw;
+}
+
+.spinner li:nth-child(3), .spinner li:nth-child(3):after{
+  width: 40vw;
+  height: 40vw;
+
+  margin-left: -20vw;
+  margin-top: -20vw;
+}
+
+.spinner li:nth-child(4), .spinner li:nth-child(4):after{
+  width: 50vw;
+  height: 50vw;
+
+  margin-left: -25vw;
+  margin-top: -25vw;
+}
+
+.spinner li:nth-child(5), .spinner li:nth-child(5):after{
+  width: 60vw;
+  height: 60vw;
+
+  margin-left: -30vw;
+  margin-top: -30vw;
+}
+
+.spinner li:nth-child(6), .spinner li:nth-child(6):after{
+  width: 70vw;
+  height: 70vw;
+
+  margin-left: -35vw;
+  margin-top: -35vw;
 }
 
 
