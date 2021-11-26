@@ -7,8 +7,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
     <script src="components/spinner/spinner.js" type="module"></script>
+
+    <script src="https://unpkg.com/vue@3.2.23" defer></script>
+    <script src="index.js" defer></script>
 </head>
 <body>
-    <spinner-deluxe circles="4" speed="50"></spinner-deluxe>
+    <section id="app">
+        <h1>Spinner</h1>
+        <spinner-deluxe :circles="circles" speed="50"></spinner-deluxe>
+        <button type="button" @click="addCircle">More</button>
+        <button type="button" @click="removeCircle">Less</button>
+    </section>
+    
 </body>
 </html>
