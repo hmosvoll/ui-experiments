@@ -45,7 +45,7 @@ body {
   border-color: #232830;
 }
 
-/* I guess preprocessor would be nice here, or is it a new modern way to solve this with plain css? :thinking_face: */
+/* I guess a preprocessor would be nice here, or is it a new modern way to solve this with plain css? :thinking_face: */
 
 .spinner li:nth-child(1), .spinner li:nth-child(1):after{
   width: 20vw;
