@@ -1,0 +1,103 @@
+
+.spinner {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .spinner:after {
+    content: "";
+    position: fixed;
+    left: 50%;
+    top: 50%;
+  
+    width: 10vw;
+    height: 10vw;
+  
+    margin-left: -5vw;
+    margin-top: -5vw;
+    border-radius: 50%;
+    background-color: #b2bbd3;
+  }
+  
+  .spinner li, .spinner li:after{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+  
+    border-radius: 50%;
+    border: 2.5vw solid;
+  
+    box-sizing: border-box;
+  }
+  
+  .spinner li:after{
+    content: "";
+    animation: spin 3s infinite linear;
+    border-color: #b2bbd3 transparent transparent transparent;
+  }
+  
+  .spinner li {
+    border-color: #232830;
+  }
+  
+  /* I guess a preprocessor would be nice here, or is it a new modern way to solve this with plain css? :thinking_face: */
+  
+  .spinner li:nth-child(1), .spinner li:nth-child(1):after{
+    width: 20vw;
+    height: 20vw;
+  
+    margin-left: -10vw;
+    margin-top: -10vw;
+  }
+  
+  .spinner li:nth-child(2), .spinner li:nth-child(2):after{
+    width: 30vw;
+    height: 30vw;
+  
+    margin-left: -15vw;
+    margin-top: -15vw;
+  }
+  
+  .spinner li:nth-child(3), .spinner li:nth-child(3):after{
+    width: 40vw;
+    height: 40vw;
+  
+    margin-left: -20vw;
+    margin-top: -20vw;
+  }
+  
+  .spinner li:nth-child(4), .spinner li:nth-child(4):after{
+    width: 50vw;
+    height: 50vw;
+  
+    margin-left: -25vw;
+    margin-top: -25vw;
+  }
+  
+  .spinner li:nth-child(5), .spinner li:nth-child(5):after{
+    width: 60vw;
+    height: 60vw;
+  
+    margin-left: -30vw;
+    margin-top: -30vw;
+  }
+  
+  .spinner li:nth-child(6), .spinner li:nth-child(6):after{
+    width: 70vw;
+    height: 70vw;
+  
+    margin-left: -35vw;
+    margin-top: -35vw;
+  }
+  
+  
+  @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+    
+      to {
+        transform: rotate(360deg);
+      }
+    }
