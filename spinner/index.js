@@ -1,17 +1,23 @@
 const spinnerApp = {
     data(){
         return {
-            circles: 1
+            circles: 1,
+            chillItKylo: false
         }
     },
     methods: {
         addCircle(){
-            this.circles++;
-            console.log("More circles");
+            if(this.circles < 6){
+                this.circles++;
+            } else {
+                this.chillItKylo = true;
+            }
         }, 
         removeCircle(){
-            this.circles--;
-            console.log("Less circles");
+            if(this.circles > 0){
+                this.circles--;
+                this.chillItKylo = false;
+            }
         }
     }
 }

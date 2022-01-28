@@ -25,6 +25,15 @@ body {
   margin-top: 0;
 }
 
+.big-as-button{
+  font-weight: bold;
+  display: inline-block;
+  font-size: 1rem;
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+}
+
 .button {
   background-color: #292e3a;
   border: 0;
@@ -33,8 +42,16 @@ body {
   border-radius: 3px;
   padding: 0.5rem 1rem;
   cursor: pointer;
-
   margin: 0 0.5rem;
+}
+
+.button:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .content {

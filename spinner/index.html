@@ -15,8 +15,18 @@
     <div class="container">
         <section class="panel">
             <h1 class="panel-heading">Spinner</h1>
-            <button type="button" @click="addCircle" class="button">More</button>
-            <button type="button" @click="removeCircle" class="button">Less</button>
+            <p class="big-as-button" v-if="chillItKylo"> 
+                🧊 Chill it Kylo 🧊
+            </p>
+            <button v-else type="button" @click="addCircle" class="button">
+                <span v-if="circles === 2">More!</span>
+                <span v-else-if="circles === 3">More!!</span>
+                <span v-else-if="circles === 4">MORE!!!</span>
+                <span v-else-if="circles === 5">MoRe!!!!</span>
+                <span v-else-if="circles === 6" class="bold">MORE!!!!!</span>
+                <span v-else>More</span>
+            </button>
+            <button :disabled="circles === 0" type="button" @click="removeCircle" class="button">Less</button>
         </section>
         <section class="content">
             <spinner-deluxe :circles="circles" speed="50"></spinner-deluxe>
