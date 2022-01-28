@@ -17,11 +17,11 @@
     left: 50%;
     top: 50%;
   
-    width: 10vw;
-    height: 10vw;
+    width: 10vmin;
+    height: 10vmin;
   
-    margin-left: -5vw;
-    margin-top: -5vw;
+    margin-left: -5vmin;
+    margin-top: -5vmin;
     border-radius: 50%;
     background-color: #b2bbd3;
   }
@@ -32,7 +32,7 @@
     top: 50%;
   
     border-radius: 50%;
-    border: 2.5vw solid;
+    border: 2.5vmin solid;
   
     box-sizing: border-box;
   }
@@ -50,51 +50,51 @@
   /* I guess a preprocessor would be nice here, or is it a new modern way to solve this with plain css? :thinking_face: */
   
   .spinner li:nth-child(1), .spinner li:nth-child(1):after{
-    width: 20vw;
-    height: 20vw;
+    width: 20vmin;
+    height: 20vmin;
   
-    margin-left: -10vw;
-    margin-top: -10vw;
+    margin-left: -10vmin;
+    margin-top: -10vmin;
   }
   
   .spinner li:nth-child(2), .spinner li:nth-child(2):after{
-    width: 30vw;
-    height: 30vw;
+    width: 30vmin;
+    height: 30vmin;
   
-    margin-left: -15vw;
-    margin-top: -15vw;
+    margin-left: -15vmin;
+    margin-top: -15vmin;
   }
   
   .spinner li:nth-child(3), .spinner li:nth-child(3):after{
-    width: 40vw;
-    height: 40vw;
+    width: 40vmin;
+    height: 40vmin;
   
-    margin-left: -20vw;
-    margin-top: -20vw;
+    margin-left: -20vmin;
+    margin-top: -20vmin;
   }
   
   .spinner li:nth-child(4), .spinner li:nth-child(4):after{
-    width: 50vw;
-    height: 50vw;
+    width: 50vmin;
+    height: 50vmin;
   
-    margin-left: -25vw;
-    margin-top: -25vw;
+    margin-left: -25vmin;
+    margin-top: -25vmin;
   }
   
   .spinner li:nth-child(5), .spinner li:nth-child(5):after{
-    width: 60vw;
-    height: 60vw;
+    width: 60vmin;
+    height: 60vmin;
   
-    margin-left: -30vw;
-    margin-top: -30vw;
+    margin-left: -30vmin;
+    margin-top: -30vmin;
   }
   
   .spinner li:nth-child(6), .spinner li:nth-child(6):after{
-    width: 70vw;
-    height: 70vw;
+    width: 70vmin;
+    height: 70vmin;
   
-    margin-left: -35vw;
-    margin-top: -35vw;
+    margin-left: -35vmin;
+    margin-top: -35vmin;
   }
   
   
