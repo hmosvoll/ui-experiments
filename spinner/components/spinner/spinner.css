@@ -1,13 +1,19 @@
+:host{
+  display: flex;
+  height: 100%;
+}
 
 .spinner {
     list-style: none;
+    flex-grow:1;
+    position:relative;
     padding: 0;
     margin: 0;
   }
   
   .spinner:after {
     content: "";
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 50%;
   
@@ -21,7 +27,7 @@
   }
   
   .spinner li, .spinner li:after{
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 50%;
   

@@ -11,14 +11,17 @@
     <script src="https://unpkg.com/vue@3.2.23" defer integrity="sha384-A0HVdBfJ6aHzEjl1hkgpBnR7WZIQMQtg/7zbEyO4GkHI5TYhc0xNuYj3hbc/L/JP" crossorigin="anonymous"></script>
     <script src="index.js" defer></script>
 </head>
-<body>
-    <section id="app" class="panel">
-        <h1 class="panel-heading">Spinner</h1>
-        <spinner-deluxe :circles="circles" speed="50"></spinner-deluxe>
-        <button type="button" @click="addCircle" class="button">More</button>
-        <button type="button" @click="removeCircle" class="button">Less</button>
-    </section>
-    
+<body id="app">
+    <div class="container">
+        <section class="panel">
+            <h1 class="panel-heading">Spinner</h1>
+            <button type="button" @click="addCircle" class="button">More</button>
+            <button type="button" @click="removeCircle" class="button">Less</button>
+        </section>
+        <section class="content">
+            <spinner-deluxe :circles="circles" speed="50"></spinner-deluxe>
+        </section>
+    </div>
     <!-- <spinner-deluxe circles="2"></spinner-deluxe> -->
 </body>
 </html>
