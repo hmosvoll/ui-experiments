@@ -13,17 +13,24 @@
     <script src="app.js"></script>
 </head>
 <body>
-    <h1>Hello web sockets</h1>
+    <div class="content">
+        <header class="header">
+            <h1 class="header-title">Draw</h1>    
+        </header>
 
+        <div class="modal-wrapper">
+            <section class="modal">
+                <form>
+                    <label class="form-label">
+                        Name
+                        <input class="form-input">
+                    </label>
+                    <button class="form-button" type="button">Start drawing</button>
+                </form>
+            </section>
+        </div>
 
-    <!-- <section class="name-panel">
-        <form>
-            <label>
-                Name:
-                <input name="">
-            </label>
-            <button type="button">Hey</button>
-        </form>
-    </section> -->
+        <canvas id="canvas" class="canvas"></canvas>
+    </div>
 </body>
 </html>

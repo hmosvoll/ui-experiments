@@ -1,4 +1,74 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
 body {
+
+    background: #222222;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    color: #eeeeee;
+    padding: 1rem;
+}
+
+.modal-wrapper{
+    position: fixed;
+    z-index: 9000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000050;
+}
+
+.modal {
+    background-color: #333333;
+    color: #eeeeee;
+    border-radius: 3px;
+    padding: 2rem;
+    top: 40%;
+    bottom: 40%;
+    width: 20rem;
+}
+
+.canvas {
+    flex-grow: 1;
+    background-color: #eeeeee;
+}
+
+.form-label{
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.form-input{
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    display: block;
+}
+
+.form-button{
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
     color: white;
-    background: black;
+    background-color: #0b617b;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
 }
