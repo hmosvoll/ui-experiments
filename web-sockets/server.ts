@@ -3,18 +3,27 @@ import { serveFile, serveDir } from "https://deno.land/std@0.131.0/http/file_ser
 
 console.log("Listening on http://localhost:8000");
 
+const sockets : WebSocket[] = [];
+
 serve(async (req) => {
     const pathname = new URL(req.url).pathname;
 
     if (req.headers.get("upgrade") === "websocket") {
         const { socket: ws, response } = Deno.upgradeWebSocket(req);
-        
+
         ws.onopen = () => {
+            sockets.push(ws);
             console.log("Connected to client ...");
         }
         
         ws.onmessage = (message) => {
-            console.log(`Client says: ${message.data}`)
+            console.log(`Client says: ${message.data}`);
+
+            sockets.forEach((socket) => {
+                if(socket !== ws){
+                    socket.send("Other client says Hello");
+                }
+            });
 
             ws.send("Hey Client");
         };
