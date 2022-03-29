@@ -6,8 +6,22 @@ console.log("Listening on http://localhost:8000");
 serve(async (req) => {
     const pathname = new URL(req.url).pathname;
 
-    console.log(pathname);
-    
+    if (req.headers.get("upgrade") === "websocket") {
+        const { socket: ws, response } = Deno.upgradeWebSocket(req);
+        
+        ws.onopen = () => {
+            console.log("Connected to client ...");
+        }
+        
+        ws.onmessage = (message) => {
+            console.log(`Client says: ${message.data}`)
+
+            ws.send("Hey Client");
+        };
+
+        return response;
+    }
+
     if(pathname === "/"){
         return await serveFile(req, `${Deno.cwd()}/static/index.html`)
     }
