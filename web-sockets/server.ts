@@ -28,6 +28,11 @@ serve(async (req) => {
             ws.send("Hey Client");
         };
 
+        ws.onclose = () => {
+            const index = sockets.indexOf(ws);
+            sockets.splice(index, 1);
+        }
+
         return response;
     }
 
