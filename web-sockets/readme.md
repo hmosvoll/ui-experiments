@@ -1,5 +1,5 @@
 # Web sockets
 
-deno run --allow-net=0.0.0.0:8000 --allow-read=./ server.ts
+deno run --allow-net=0.0.0.0:8000 --allow-read=./ ./server/server.ts
 
-deno bundle --config ./tsconfig.json --watch ./client.ts ./static/app.js
+deno bundle --config ./client/tsconfig.json --watch ./client/client.ts ./static/app.js
