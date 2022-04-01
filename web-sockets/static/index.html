@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="app.css">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     
-    <script src="app.js"></script>
+    <script src="app.js" type="module"></script>
 </head>
 <body>
     <div class="content">
@@ -18,14 +18,14 @@
             <h1 class="header-title">Draw</h1>    
         </header>
 
-        <div class="modal-wrapper">
+        <div id="modal-wrapper" class="modal-wrapper">
             <section class="modal">
                 <form>
                     <label class="form-label">
                         Name
-                        <input class="form-input">
+                        <input id="name-input" class="form-input">
                     </label>
-                    <button class="form-button" type="button">Start drawing</button>
+                    <button id="submit-name" class="form-button" type="button">Start drawing</button>
                 </form>
             </section>
         </div>
