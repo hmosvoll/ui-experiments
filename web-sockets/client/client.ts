@@ -2,7 +2,7 @@ const submitNameButton = document.querySelector("#submit-name");
 const modalWrapper = document.querySelector("#modal-wrapper");
 const nameInput = document.querySelector("#name-input") as HTMLInputElement;
 
-let drawerName;
+let drawerName : string;
 
 submitNameButton?.addEventListener("click", () => {
    console.log("clicked!");
@@ -16,7 +16,11 @@ submitNameButton?.addEventListener("click", () => {
 
    // Connection opened
    socket.addEventListener('open', function (event) {
-      socket.send('Hello Server!');
+      const message = {
+        type: "join",
+        name: drawerName
+      };
+      socket.send(JSON.stringify(message));
    });
 
    // Listen for messages
@@ -34,7 +38,7 @@ const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
 const canvasContainer = document.querySelector("#canvas-container") as HTMLDivElement;
 const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 
-canvas.width = canvasContainer.clientHeight;
+canvas.width = canvasContainer.clientWidth;
 canvas.height = canvasContainer.clientHeight;
 
 // event.offsetX, event.offsetY gives the (x,y) offset from the edge of the canvas.

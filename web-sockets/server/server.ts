@@ -1,8 +1,11 @@
 import { serve } from "https://deno.land/std@0.131.0/http/server.ts";
 import { serveFile, serveDir } from "https://deno.land/std@0.131.0/http/file_server.ts";
 
+import Drawer from "./Drawer.ts";
+
 console.log("Listening on http://localhost:8000");
 
+const drawers :  Drawer[] = [];
 const sockets : WebSocket[] = [];
 
 serve(async (req) => {
@@ -13,24 +16,32 @@ serve(async (req) => {
 
         ws.onopen = () => {
             sockets.push(ws);
-            console.log("Connected to client ...");
+            drawers.push({ socket: ws });
         }
-        
+
         ws.onmessage = (message) => {
             console.log(`Client says: ${message.data}`);
 
-            sockets.forEach((socket) => {
-                if(socket !== ws){
-                    socket.send("Other client says Hello");
-                }
-            });
+            const messageData = JSON.parse(message.data);
+            const drawer = drawers.find((d) => d.socket === ws);
+            
+            if(messageData.type === "join"){
+                drawer.name = messageData.name;
 
-            ws.send("Hey Client");
+                const drawerJoinedMessage = JSON.stringify({
+                    type: "joined",
+                    name: drawer.name
+                });
+    
+                drawers.forEach((d) => {
+                    d.socket.send(drawerJoinedMessage);
+                });
+            }
         };
 
         ws.onclose = () => {
-            const index = sockets.indexOf(ws);
-            sockets.splice(index, 1);
+            const drawerIndex = drawers.findIndex((d) => d.socket === ws);
+            drawers.splice(drawerIndex, 1);
         }
 
         return response;
