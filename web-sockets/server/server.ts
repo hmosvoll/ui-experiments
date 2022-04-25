@@ -28,20 +28,15 @@ serve(async (req) => {
             if(messageData.type === "join"){
                 drawer.name = messageData.name;
 
-                const drawerJoinedMessage = JSON.stringify({
-                    type: "joined",
-                    name: drawer.name
-                });
-    
-                drawers.forEach((d) => {
-                    d.socket.send(drawerJoinedMessage);
-                });
+                broadcastDrawers(drawers);
             }
         };
 
         ws.onclose = () => {
             const drawerIndex = drawers.findIndex((d) => d.socket === ws);
+            
             drawers.splice(drawerIndex, 1);
+            broadcastDrawers(drawers);
         }
 
         return response;
@@ -60,3 +55,22 @@ serve(async (req) => {
 
     return new Response();
 });
+
+
+function broadcastDrawers(drawers : Drawer[]){
+    const drawerNames : String[] = [];
+    
+    drawers.forEach((d) => {
+        drawerNames.push(d.name);
+    });
+
+    const message = JSON.stringify({
+        type: "drawerNames",
+        drawerNames 
+    });
+
+    // TODO: Fix double loop
+    drawers.forEach((d) => {
+        d.socket.send(message);
+    });
+}

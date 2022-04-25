@@ -1,6 +1,7 @@
 const submitNameButton = document.querySelector("#submit-name");
 const modalWrapper = document.querySelector("#modal-wrapper");
 const nameInput = document.querySelector("#name-input") as HTMLInputElement;
+const drawers = document.querySelector("#drawers") as HTMLUListElement;
 
 let drawerName : string;
 
@@ -25,6 +26,21 @@ submitNameButton?.addEventListener("click", () => {
 
    // Listen for messages
    socket.addEventListener('message', function (event) {
+      console.log(event.data)
+      const message = JSON.parse(event.data);
+
+      if(message.type === "drawerNames"){
+        const drawerNames = message.drawerNames as string[];
+        drawers.innerHTML = "";
+
+        drawerNames.forEach(drawerName => {
+          const drawerListElement = document.createElement("li");
+          drawerListElement.textContent = drawerName.charAt(0);
+          drawerListElement.setAttribute("title", drawerName);  
+          drawers.appendChild(drawerListElement);
+        });
+      }
+
       console.log('Message from server ', event.data);
    });
 });
