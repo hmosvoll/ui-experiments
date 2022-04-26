@@ -1,48 +1,48 @@
-const submitNameButton = document.querySelector("#submit-name");
+const nameForm = document.querySelector("#name-form");
 const modalWrapper = document.querySelector("#modal-wrapper");
 const nameInput = document.querySelector("#name-input") as HTMLInputElement;
 const drawers = document.querySelector("#drawers") as HTMLUListElement;
 
 let drawerName : string;
 
-submitNameButton?.addEventListener("click", () => {
-   console.log("clicked!");
-   drawerName = nameInput.value; 
-   modalWrapper?.classList.add("hide");
+nameForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  drawerName = nameInput.value; 
+  modalWrapper?.classList.add("hide");
 
-   console.log("Drawer's name is ", drawerName);
+  console.log("Drawer's name is ", drawerName);
 
-   // Create WebSocket connection.
-   const socket = new WebSocket('ws://localhost:8000');
+  // Create WebSocket connection.
+  const socket = new WebSocket('ws://localhost:8000');
 
-   // Connection opened
-   socket.addEventListener('open', function (event) {
-      const message = {
-        type: "join",
-        name: drawerName
-      };
-      socket.send(JSON.stringify(message));
-   });
+  // Connection opened
+  socket.addEventListener('open', function (event) {
+    const message = {
+      type: "join",
+      name: drawerName
+    };
+    socket.send(JSON.stringify(message));
+  });
 
-   // Listen for messages
-   socket.addEventListener('message', function (event) {
-      console.log(event.data)
-      const message = JSON.parse(event.data);
+  // Listen for messages
+  socket.addEventListener('message', function (event) {
+    console.log(event.data)
+    const message = JSON.parse(event.data);
 
-      if(message.type === "drawerNames"){
-        const drawerNames = message.drawerNames as string[];
-        drawers.innerHTML = "";
+    if(message.type === "drawerNames"){
+      const drawerNames = message.drawerNames as string[];
+      drawers.innerHTML = "";
 
-        drawerNames.forEach(drawerName => {
-          const drawerListElement = document.createElement("li");
-          drawerListElement.textContent = drawerName.charAt(0);
-          drawerListElement.setAttribute("title", drawerName);  
-          drawers.appendChild(drawerListElement);
-        });
-      }
+      drawerNames.forEach(drawerName => {
+        const drawerListElement = document.createElement("li");
+        drawerListElement.textContent = drawerName.charAt(0);
+        drawerListElement.setAttribute("title", drawerName);  
+        drawers.appendChild(drawerListElement);
+      });
+    }
 
-      console.log('Message from server ', event.data);
-   });
+    console.log('Message from server ', event.data);
+  });
 });
 
 // When true, moving the mouse draws on the canvas
