@@ -50,6 +50,9 @@ let isDrawing = false;
 let x = 0;
 let y = 0;
 
+let delay = false;
+let lines: number[][] = [];
+
 const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
 const canvasContainer = document.querySelector("#canvas-container") as HTMLDivElement;
 const context = canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -69,18 +72,14 @@ canvas.addEventListener('mousedown', e => {
 canvas.addEventListener('mousemove', e => {
   if (isDrawing === true) {
     drawLine(context, x, y, e.offsetX, e.offsetY);
+    sendLine(x, y, e.offsetX, e.offsetY);
     x = e.offsetX;
     y = e.offsetY;
   }
 });
 
 window.addEventListener('mouseup', e => {
-  if (isDrawing === true) {
-    drawLine(context, x, y, e.offsetX, e.offsetY);
-    x = 0;
-    y = 0;
     isDrawing = false;
-  }
 });
 
 function drawLine(context : CanvasRenderingContext2D, x1 : number, y1 : number, x2 : number, y2 : number) {
@@ -91,4 +90,22 @@ function drawLine(context : CanvasRenderingContext2D, x1 : number, y1 : number, 
   context.lineTo(x2, y2);
   context.stroke();
   context.closePath();
+}
+
+
+function sendLine(x1 : number, y1 : number, x2 : number, y2 : number){
+  lines.push([x1, y1, x2, y2]);
+
+  if(!delay){
+    // TODO send lines
+    console.log(lines);
+
+    lines = [];
+    delay = true;
+
+    setTimeout(() => {
+      delay = false;
+    }, 500)
+  }
+
 }
