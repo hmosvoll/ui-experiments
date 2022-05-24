@@ -23,12 +23,17 @@ serve(async (req) => {
             console.log(`Client says: ${message.data}`);
 
             const messageData = JSON.parse(message.data);
-            const drawer = drawers.find((d) => d.socket === ws);
-            
+
             if(messageData.type === "join"){
+                const drawer = drawers.find((d) => d.socket === ws);
+
                 drawer.name = messageData.name;
 
                 broadcastDrawers(drawers);
+            }
+
+            if(messageData.type === "drawLines"){
+                broadcastLines(drawers, ws, message.data);
             }
         };
 
@@ -56,6 +61,14 @@ serve(async (req) => {
     return new Response();
 });
 
+
+function broadcastLines(drawers : Drawer[], sender:WebSocket, lines : string){
+    drawers.forEach((d) => {
+        if(d.socket !== sender){
+            d.socket.send(lines);
+        }
+    });
+}
 
 function broadcastDrawers(drawers : Drawer[]){
     const drawerNames : String[] = [];

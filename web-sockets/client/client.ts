@@ -4,6 +4,7 @@ const nameInput = document.querySelector("#name-input") as HTMLInputElement;
 const drawers = document.querySelector("#drawers") as HTMLUListElement;
 
 let drawerName : string;
+let socket : WebSocket;
 
 nameForm?.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -13,7 +14,7 @@ nameForm?.addEventListener("submit", (e) => {
   console.log("Drawer's name is ", drawerName);
 
   // Create WebSocket connection.
-  const socket = new WebSocket('ws://localhost:8000');
+  socket = new WebSocket('ws://localhost:8000');
 
   // Connection opened
   socket.addEventListener('open', function (event) {
@@ -39,6 +40,11 @@ nameForm?.addEventListener("submit", (e) => {
         drawerListElement.setAttribute("title", drawerName);  
         drawers.appendChild(drawerListElement);
       });
+    }
+
+    if(message.type === "drawLines"){
+      console.log("Received lines: ");
+      console.log(message.lines);
     }
 
     console.log('Message from server ', event.data);
@@ -97,8 +103,12 @@ function sendLine(x1 : number, y1 : number, x2 : number, y2 : number){
   lines.push([x1, y1, x2, y2]);
 
   if(!delay){
-    // TODO send lines
+    console.log("Sending lines: ");
     console.log(lines);
+    
+    const message = { type: "drawLines", lines}
+
+    socket.send(JSON.stringify(message));
 
     lines = [];
     delay = true;
@@ -107,5 +117,4 @@ function sendLine(x1 : number, y1 : number, x2 : number, y2 : number){
       delay = false;
     }, 500)
   }
-
 }
