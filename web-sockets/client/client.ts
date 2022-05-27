@@ -43,11 +43,16 @@ nameForm?.addEventListener("submit", (e) => {
     }
 
     if(message.type === "drawLines"){
-      console.log("Received lines: ");
-      console.log(message.lines);
+      message.lines.forEach((line: number[]) => {
+        drawLine(context, line[0], line[1], line[2], line[3]);
+      });
     }
 
-    console.log('Message from server ', event.data);
+    if(message.type === "drawingState"){
+      message.lines.forEach((line: number[]) => {
+        drawLine(context, line[0], line[1], line[2], line[3]);
+      });
+    }
   });
 });
 
@@ -56,8 +61,7 @@ let isDrawing = false;
 let x = 0;
 let y = 0;
 
-let delay = false;
-let lines: number[][] = [];
+
 
 const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
 const canvasContainer = document.querySelector("#canvas-container") as HTMLDivElement;
@@ -99,22 +103,21 @@ function drawLine(context : CanvasRenderingContext2D, x1 : number, y1 : number, 
 }
 
 
-function sendLine(x1 : number, y1 : number, x2 : number, y2 : number){
-  lines.push([x1, y1, x2, y2]);
+let delayActive = false;
+let lines: number[][] = [];
 
-  if(!delay){
-    console.log("Sending lines: ");
-    console.log(lines);
-    
-    const message = { type: "drawLines", lines}
+function sendLine(x1 : number, y1 : number, x2 : number, y2 : number) : void {  
+    lines.push([x1, y1, x2, y2]);
 
-    socket.send(JSON.stringify(message));
+    if(!delayActive){
+      setTimeout(() => {
+        const message = { type: "drawLines", lines};
+        socket.send(JSON.stringify(message));
 
-    lines = [];
-    delay = true;
+        lines = [];
+        delayActive = false;
+      }, 500);
 
-    setTimeout(() => {
-      delay = false;
-    }, 500)
-  }
+      delayActive = true;
+    }
 }

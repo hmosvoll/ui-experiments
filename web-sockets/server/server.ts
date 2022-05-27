@@ -8,6 +8,8 @@ console.log("Listening on http://localhost:8000");
 const drawers :  Drawer[] = [];
 const sockets : WebSocket[] = [];
 
+localStorage.setItem("drawing", JSON.stringify([]));
+
 serve(async (req) => {
     const pathname = new URL(req.url).pathname;
 
@@ -26,13 +28,21 @@ serve(async (req) => {
 
             if(messageData.type === "join"){
                 const drawer = drawers.find((d) => d.socket === ws);
-
                 drawer.name = messageData.name;
 
                 broadcastDrawers(drawers);
+
+                const drawingState = localStorage.getItem("drawing");
+                sendDrawingState(drawer, drawingState);
+
             }
 
             if(messageData.type === "drawLines"){
+                const oldDrawingStateAsJson = localStorage.getItem("drawing");
+                const oldDrawingState = JSON.parse(oldDrawingStateAsJson);
+                const newDrawingState = oldDrawingState.concat(message.data.lines);
+                localStorage.setItem("drawing", JSON.stringify(newDrawingState));
+
                 broadcastLines(drawers, ws, message.data);
             }
         };
@@ -86,4 +96,13 @@ function broadcastDrawers(drawers : Drawer[]){
     drawers.forEach((d) => {
         d.socket.send(message);
     });
+}
+
+function sendDrawingState(drawer: Drawer, drawingState: number[][]){
+    const message = JSON.stringify({
+        type: "drawingState",
+        lines: drawingState 
+    });
+
+    drawer.socket.send(message);
 }
