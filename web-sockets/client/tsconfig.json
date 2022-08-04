@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
-      "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"]
+      "lib": ["ESNext", "dom"],
+      "strict": true
     }
 }
