@@ -28,19 +28,39 @@ serve(async (req) => {
 
             if(messageData.type === "join"){
                 const drawer = drawers.find((d) => d.socket === ws);
-                drawer.name = messageData.name;
+                
+                if(!drawer){
+                    // TODO: Could this be handled in a better way?
+                    throw new Error("Could not find drawer")
+                }
 
+                drawer.name = messageData.name;
+                
                 broadcastDrawers(drawers);
 
-                const drawingState = localStorage.getItem("drawing");
-                sendDrawingState(drawer, drawingState);
+                const drawingStateAsJson = localStorage.getItem("drawing");
 
+                if(!drawingStateAsJson){
+                    throw new Error("Could not find drawing state");
+                }
+
+                const drawingState = JSON.parse(drawingStateAsJson);
+
+                sendDrawingState(drawer, drawingState);
             }
 
             if(messageData.type === "drawLines"){
                 const oldDrawingStateAsJson = localStorage.getItem("drawing");
+
+                if(!oldDrawingStateAsJson){
+                    throw new Error("Could not find drawing state");
+                }
+
                 const oldDrawingState = JSON.parse(oldDrawingStateAsJson);
-                const newDrawingState = oldDrawingState.concat(message.data.lines);
+                const newDrawingMassage = JSON.parse(message.data)
+                
+                const newDrawingState = oldDrawingState.concat(newDrawingMassage.lines);
+                
                 localStorage.setItem("drawing", JSON.stringify(newDrawingState));
 
                 broadcastLines(drawers, ws, message.data);
@@ -81,10 +101,12 @@ function broadcastLines(drawers : Drawer[], sender:WebSocket, lines : string){
 }
 
 function broadcastDrawers(drawers : Drawer[]){
-    const drawerNames : String[] = [];
+    const drawerNames : string[] = [];
     
     drawers.forEach((d) => {
-        drawerNames.push(d.name);
+        if(d.name){
+            drawerNames.push(d.name);
+        }
     });
 
     const message = JSON.stringify({
@@ -101,7 +123,7 @@ function broadcastDrawers(drawers : Drawer[]){
 function sendDrawingState(drawer: Drawer, drawingState: number[][]){
     const message = JSON.stringify({
         type: "drawingState",
-        lines: drawingState 
+        lines: drawingState
     });
 
     drawer.socket.send(message);
