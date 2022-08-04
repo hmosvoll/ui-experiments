@@ -12,7 +12,7 @@ nameForm?.addEventListener("submit", (e) => {
   modalWrapper?.classList.add("hide");
 
   console.log("Drawer's name is ", drawerName);
-
+  
   // Create WebSocket connection.
   socket = new WebSocket('ws://localhost:8000');
 
@@ -23,6 +23,7 @@ nameForm?.addEventListener("submit", (e) => {
       name: drawerName
     };
     socket.send(JSON.stringify(message));
+    setConnectedFavicon();
   });
 
   // Listen for messages
@@ -120,4 +121,12 @@ function sendLine(x1 : number, y1 : number, x2 : number, y2 : number) : void {
 
       delayActive = true;
     }
+}
+
+function setConnectedFavicon(){
+  const favicon = document.querySelector("link[rel='icon']");
+  
+  if(favicon){
+    favicon.setAttribute("href", "/favicon-connected.svg");
+  }
 }
