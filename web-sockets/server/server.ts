@@ -56,6 +56,7 @@ serve(async (req) => {
                     throw new Error("Could not find drawing state");
                 }
 
+                // TODO: Research if there a more suitable data type then json
                 const oldDrawingState = JSON.parse(oldDrawingStateAsJson);
                 const newDrawingMassage = JSON.parse(message.data)
                 

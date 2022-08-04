@@ -44,9 +44,7 @@ nameForm?.addEventListener("submit", (e) => {
     }
 
     if(message.type === "drawLines"){
-      message.lines.forEach((line: number[]) => {
-        drawLine(context, line[0], line[1], line[2], line[3]);
-      });
+        animateLines(message.lines);
     }
 
     if(message.type === "drawingState"){
@@ -61,8 +59,6 @@ nameForm?.addEventListener("submit", (e) => {
 let isDrawing = false;
 let x = 0;
 let y = 0;
-
-
 
 const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
 const canvasContainer = document.querySelector("#canvas-container") as HTMLDivElement;
@@ -103,7 +99,6 @@ function drawLine(context : CanvasRenderingContext2D, x1 : number, y1 : number, 
   context.closePath();
 }
 
-
 let delayActive = false;
 let lines: number[][] = [];
 
@@ -129,4 +124,21 @@ function setConnectedFavicon(){
   if(favicon){
     favicon.setAttribute("href", "/favicon-connected.svg");
   }
+}
+
+function animateLines (lines : number[][]){
+    let index = 0;
+
+    function animateLine (){
+      // TODO: Context as argument?
+      drawLine (context, lines[index][0], lines[index][1], lines[index][2], lines[index][3])
+      
+      index++;
+
+      if(index < lines.length){
+        window.requestAnimationFrame(animateLine);
+      }
+    }
+
+    window.requestAnimationFrame(animateLine);
 }
