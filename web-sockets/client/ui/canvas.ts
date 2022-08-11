@@ -1,4 +1,4 @@
-import Line from "../models/Line.ts";
+import Line from "../interfaces/Line.ts";
 
 let startX = 0;
 let startY = 0;

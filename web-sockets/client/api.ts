@@ -1,4 +1,4 @@
-import Line from "./models/Line.ts";
+import Line from "./interfaces/Line.ts";
 
 let delayActive = false;
 let lines: number[][] = [];

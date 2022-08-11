@@ -1,8 +1,8 @@
-import { setStartingPosition, getCanvas, draw, animateLines, drawLine } from "./ui/drawing.ts";
+import { setStartingPosition, getCanvas, draw, animateLines, drawLine } from "./ui/canvas.ts";
 import { connect, registerDrawer, sendLine } from "./api.ts";
 import { setConnectedFavicon } from "./ui/favicon.ts";
-import { getDrawerName, getFrom, hideModal } from "./ui/drawer-registration.ts";
-import { setDrawers } from "./ui/drawers.ts";
+import { getDrawerName, getFrom, hideModal } from "./ui/registrationModal.ts";
+import { setDrawers } from "./ui/userList.ts";
 
 const canvas = getCanvas();
 const registrationForm = getFrom();
