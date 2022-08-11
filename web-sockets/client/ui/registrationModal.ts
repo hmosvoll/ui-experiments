@@ -12,10 +12,10 @@ export function hideModal(){
 
 export function getFrom(){
     const nameForm = document.querySelector("#name-form");
-
+    
     if (nameForm === null){
         throw new Error("Could not find name form.")
     }
-
+    
     return nameForm;
 }

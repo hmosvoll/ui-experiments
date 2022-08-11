@@ -22,26 +22,26 @@ export function setStartingPosition(x : number, y : number){
 export function draw(endX : number, endY : number) : Line{
     const line = { startX, startY, endX, endY };
     drawLine(startX, startY, endX, endY);
-
+    
     startX = endX;
     startY = endY;
-
+    
     return line;
 }
 
 export function animateLines (lines : number[][]){
     let index = 0;
-
+    
     function animateLine (){
-      drawLine (lines[index][0], lines[index][1], lines[index][2], lines[index][3])
-      
-      index++;
-
-      if(index < lines.length){
-        self.requestAnimationFrame(animateLine);
-      }
+        drawLine (lines[index][0], lines[index][1], lines[index][2], lines[index][3])
+        
+        index++;
+        
+        if(index < lines.length){
+            self.requestAnimationFrame(animateLine);
+        }
     }
-
+    
     self.requestAnimationFrame(animateLine);
 }
 

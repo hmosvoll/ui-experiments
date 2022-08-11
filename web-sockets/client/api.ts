@@ -12,17 +12,17 @@ export function connect(){
 
 export function sendLine(line : Line) : void {  
     lines.push([line.startX, line.startY, line.endX, line.endY]);
-
+    
     if(!delayActive){
-      setTimeout(() => {
-        const message = { type: "drawLines", lines};
-        socket.send(JSON.stringify(message));
-
-        lines = [];
-        delayActive = false;
-      }, 500);
-
-      delayActive = true;
+        setTimeout(() => {
+            const message = { type: "drawLines", lines};
+            socket.send(JSON.stringify(message));
+            
+            lines = [];
+            delayActive = false;
+        }, 500);
+        
+        delayActive = true;
     }
 }
 
@@ -31,6 +31,6 @@ export function registerDrawer (drawerName : string){
         type: "join",
         name: drawerName
     };
-
+    
     socket.send(JSON.stringify(message));
 }
