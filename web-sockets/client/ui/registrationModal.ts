@@ -2,6 +2,8 @@
 const modalWrapper = document.querySelector("#modal-wrapper");
 const nameInput = document.querySelector("#name-input") as HTMLInputElement;
 
+export default { getDrawerName, hideModal, getFrom }
+
 export function getDrawerName() {
     return  nameInput.value;
 }

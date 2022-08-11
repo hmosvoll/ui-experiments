@@ -1,26 +1,26 @@
-import { setStartingPosition, getCanvas, draw, animateLines, drawLine } from "./ui/canvas.ts";
-import { connect, registerDrawer, sendLine } from "./api.ts";
-import { setConnectedFavicon } from "./ui/favicon.ts";
-import { getDrawerName, getFrom, hideModal } from "./ui/registrationModal.ts";
-import { setDrawers } from "./ui/userList.ts";
+import canvasModule from "./ui/canvas.ts";
+import api from "./api.ts";
+import favicon from "./ui/favicon.ts";
+import registrationModal from "./ui/registrationModal.ts";
+import userList from "./ui/userList.ts";
 
-const canvas = getCanvas();
-const registrationForm = getFrom();
+const canvas = canvasModule.getCanvas();
+const registrationForm = registrationModal.getFrom();
 
 let socket : WebSocket;
 let isDrawing = false;
 
 registrationForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    hideModal();
-    const drawerName = getDrawerName(); 
+    registrationModal.hideModal();
+    const drawerName = registrationModal.getDrawerName(); 
     
-    socket = connect();
+    socket = api.connect();
     
     // Connection opened
     socket.addEventListener('open', function () {
-        registerDrawer(drawerName);
-        setConnectedFavicon();
+        api.registerDrawer(drawerName);
+        favicon.setConnectedFavicon();
     });
     
     // Listen for messages
@@ -30,16 +30,16 @@ registrationForm.addEventListener("submit", (e) => {
         
         if(message.type === "drawerNames"){
             const drawerNames = message.drawerNames as string[];
-            setDrawers(drawerNames);
+            userList.setDrawers(drawerNames);
         }
         
         if(message.type === "drawLines"){
-            animateLines(message.lines);
+            canvasModule.animateLines(message.lines);
         }
         
         if(message.type === "drawingState"){
             message.lines.forEach((line: number[]) => {
-                drawLine(line[0], line[1], line[2], line[3]);
+                canvasModule.drawLine(line[0], line[1], line[2], line[3]);
             });
         }
     });
@@ -47,13 +47,13 @@ registrationForm.addEventListener("submit", (e) => {
 
 canvas.addEventListener('mousedown', (e) => {
     isDrawing = true;
-    setStartingPosition(e.offsetX, e.offsetY);
+    canvasModule.setStartingPosition(e.offsetX, e.offsetY);
 });
 
 canvas.addEventListener('mousemove', (e) => {
     if (isDrawing === true) {
-        const line = draw(e.offsetX, e.offsetY);
-        sendLine(line);
+        const line = canvasModule.draw(e.offsetX, e.offsetY);
+        api.sendLine(line);
     }
 });
 

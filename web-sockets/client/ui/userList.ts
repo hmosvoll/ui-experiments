@@ -1,5 +1,7 @@
 const drawers = document.querySelector("#drawers") as HTMLUListElement;
 
+export default { setDrawers }
+
 export function setDrawers(drawerNames: string[]){
     drawers.innerHTML = "";
     

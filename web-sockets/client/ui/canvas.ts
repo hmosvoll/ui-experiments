@@ -10,6 +10,8 @@ const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 canvas.width = canvasContainer.clientWidth;
 canvas.height = canvasContainer.clientHeight
 
+export default { getCanvas, setStartingPosition, draw, animateLines, drawLine }
+
 export function getCanvas () {
     return canvas;
 }

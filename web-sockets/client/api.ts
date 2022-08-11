@@ -5,6 +5,8 @@ let lines: number[][] = [];
 
 let socket : WebSocket;
 
+export default { connect, sendLine, registerDrawer }
+
 export function connect(){
     socket = new WebSocket('ws://localhost:8000');
     return socket;
