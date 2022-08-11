@@ -1,4 +1,3 @@
-
 const modalWrapper = document.querySelector("#modal-wrapper");
 const nameInput = document.querySelector("#name-input") as HTMLInputElement;
 
